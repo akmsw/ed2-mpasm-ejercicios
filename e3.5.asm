@@ -29,9 +29,9 @@
 
 ;-------------------INICIO DEL PROGRAMA-----------------------------------------
 
-    LEXT    MOVLW   .4		    ; Cargo V1 y V2 con valores precalculados
+    LEXT    MOVLW   .2		    ; Cargo V1 y V2 con valores precalculados
 	    MOVWF   V2		    ; para que el ciclo dure 1[ms].
-    LINT    MOVLW   .83
+    LINT    MOVLW   .166
 	    MOVWF   V1
 	    DECFSZ  V1		    ; Decremento V1. Si aún no es cero...
 	    GOTO    $-1		    ; sigo decrementando V1.
