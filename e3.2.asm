@@ -25,7 +25,7 @@
 	    
 	    ORG	    0x00
 	    
-	    MOVLW   .255	    ; Cargo VAR1 y VAR2 con el valor '1'.
+	    MOVLW   .255	    ; Cargo valores aleatorios en VAR1 y VAR2.
 	    MOVWF   VAR1
 	    MOVLW   .1
 	    MOVWF   VAR2
