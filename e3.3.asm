@@ -1,6 +1,6 @@
 ;   Ejercicio 3.3:
 ;
-;   Escribir un programa que resuelva la ecuaciÛn (A + B) - C con posiciones
+;   Escribir un programa que resuelva la ecuaci√≥n (A + B) - C con posiciones
 ;   21H, 22H y 23H.
 
 ;-------------------LIBRERIAS---------------------------------------------------
@@ -19,17 +19,17 @@
 	    ORG	    0x00
 
 	    VARA    EQU	    0x21    ; Estos registros van a conformar la
-	    VARB    EQU	    0x22    ; ecuaciÛn.
+	    VARB    EQU	    0x22    ; ecuaci√≥n.
 	    VARC    EQU	    0x23
-	    RESS    EQU	    0x24    ; Registro que alcamenar· el resultado de
+	    RESS    EQU	    0x24    ; Registro que alcamenar√° el resultado de
 				    ; la suma.
-            REST    EQU	    0x25    ; Registro que almacenar· el resultado
+            REST    EQU	    0x25    ; Registro que almacenar√° el resultado
 				    ; total.
 
 ;-------------------CONFIGURACION DE REGISTROS----------------------------------
 	    
-	    MOVLW   .6		    ; Cargo valores aleatorios en cada
-	    MOVWF   VARA	    ; variable.
+	    MOVLW   .6		    ; Cargo valores aleatorios en cada variable.
+	    MOVWF   VARA
 	    MOVLW   .4
 	    MOVWF   VARB
 	    MOVLW   .2
