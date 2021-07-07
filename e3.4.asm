@@ -1,6 +1,6 @@
 ;   Ejercicio 3.4:
 ;
-;   Escribir un programa que sume dos n˙meros de 16 bits A (20H, 21H) y
+;   Escribir un programa que sume dos n√∫meros de 16 bits A (20H, 21H) y
 ;   y B (22H, 23H) y al resultado colocarlo en A.
 
 ;-------------------LIBRERIAS---------------------------------------------------
@@ -19,7 +19,7 @@
 	    ORG	    0x00
 
 	    A1	    EQU	    0x21    ; Estos registros van a conformar la
-	    A2	    EQU	    0x20    ; operaciÛn.
+	    A2	    EQU	    0x20    ; operaci√≥n.
 	    B1	    EQU	    0x23
 	    B2	    EQU	    0x22
 	    AUX	    EQU	    0x24    ; Variable auxiliar.
@@ -42,9 +42,9 @@
 	    MOVFW   A1		    ; Cargo A1 en W.
 	    ADDWF   B1,0	    ; Sumo A1 + B1 y guardo el resultado en W.
 	    MOVWF   A1		    ; Almaceno esta primer suma en A1.
-	    BTFSC   STATUS,C	    ; Si el bit de carry est· en 1...
+	    BTFSC   STATUS,C	    ; Si el bit de carry est√° en 1...
 	    INCF    A2,1	    ; Sumo 1 a A2 y lo guardo en A2.
-	    BTFSC   STATUS,C	    ; Si el bit de carry est· en 1...
+	    BTFSC   STATUS,C	    ; Si el bit de carry est√° en 1...
 	    INCF    AUX,1	    ; Incremento en 1 a AUX y lo guardo en AUX.
 	    MOVFW   A2		    ; Cargo A2 en W.
 	    ADDWF   B2,0	    ; Sumo A2 + B2 y guardo el resultado en W.
@@ -52,5 +52,4 @@
 	    BTFSC   AUX,0	    ; Si AUX vale 1 (hubo carry)...
 	    RRF	    AUX		    ; Roto AUX a la derecha para poner el 1
 				    ; en el bit de carry.
-
             END
