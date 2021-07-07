@@ -1,6 +1,10 @@
 ;   Ejercicio 3.7:
 ;
-;   Escribir un programa que compare dos n˙meros A y B.
+;   Escribir un programa que compare dos n√∫meros A y B.
+;   Si son iguales, el resultado debe ser 0.
+;   Si A > B, el resultado debe ser la resta A - B.
+;   Si A < B, el resultado debe ser la suma A + B.
+;   Considere VA en la posici√≥n 30H, VB en 31H y R en 32H.
 
 ;-------------------LIBRERIAS---------------------------------------------------
 
@@ -17,12 +21,10 @@
 	    
 	    ORG	    0x00
 
-	    VARA    EQU	    0x20    ; Variables a comparar.
-	    VARB    EQU	    0x21
-	    ANS	    EQU	    0x22    ; Variable que almacena el resultado de la
-				    ; comparaciÛn:  * 0 = son iguales
-				    ;		    * 1 = A < B
-				    ;		    * 2 = A > B
+	    VA	    EQU	    0x30    ; Variables a comparar.
+	    VB	    EQU	    0x31
+	    VR	    EQU	    0x32    ; Variable que almacena el resultado de la
+				    ; comparaci√≥n.
 
 ;-------------------CONFIGURACION DE REGISTROS----------------------------------
 	    
@@ -31,26 +33,28 @@
 ;-------------------INICIO DEL PROGRAMA-----------------------------------------
 
 	    MOVLW   .4		    ; Cargo VARA y VARB con valores aleatorios.
-	    MOVWF   VARA
-	    MOVLW   .3
-	    MOVWF   VARB
-	    MOVFW   VARA    
-	    SUBWF   VARB,0	    ; Resto B - A y almaceno el resultado en W.
+	    MOVWF   VA
+	    MOVLW   .4
+	    MOVWF   VB
+	    MOVFW   VA    
+	    SUBWF   VB,0	    ; Resto B - A y almaceno el resultado en W.
 	    BTFSC   STATUS,Z	    ; Si la resta dio cero (A = B)...
 	    GOTO    EQUALS	    ; Voy a la etiqueta EQUALS.
 	    BTFSC   STATUS,C	    ; Si hubo carry (A < B por complem. a 2)...
 	    GOTO    AMINOR
 	    GOTO    ABIGGER
 	    
-EQUALS	    CLRF    ANS		    ; Si A = B, cargo 0 en ANS.
+EQUALS	    CLRF    VR		    ; Si A = B, cargo 0 en R.
 	    GOTO    $
 
-AMINOR	    MOVLW   .1		    ; Si A < B, cargo 1 en ANS.
-	    MOVWF   ANS
+AMINOR	    MOVFW   VA		    ; Si A < B, cargo A + B en R.
+	    ADDWF   VB,0
+	    MOVWF   VR
 	    GOTO    $
 
-ABIGGER	    MOVLW   .2		    ; Si A > B, cargo 2 en ANS.
-	    MOVWF   ANS
+ABIGGER	    MOVFW   VB		    ; Si A > B, cargo A - B en R.
+	    SUBWF   VA,0
+	    MOVWF   VR
 	    GOTO    $
 	    
 	    END
