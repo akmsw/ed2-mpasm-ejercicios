@@ -1,6 +1,6 @@
 ;   Ejercicio 3.5:
 ;
-;   Escribir un programa que su ejecución dure un milisegundo
+;   Escribir un programa que su ejecución demore un milisegundo
 ;   (cristal de 4MHz).
 
 ;-------------------LIBRERIAS---------------------------------------------------
