@@ -1,6 +1,6 @@
 ;   Ejercicio 3.5:
 ;
-;   Escribir un programa que su ejecución dure un milisegundo
+;   Escribir un programa que su ejecuciÃ³n dure un milisegundo
 ;   (cristal de 4MHz).
 
 ;-------------------LIBRERIAS---------------------------------------------------
@@ -11,7 +11,7 @@
 
 ;-------------------CONFIGURACION PIC-------------------------------------------
 
-	__CONFIG    _CONFIG1, _FOSC_EXTRC_CLKOUT & _WDTE_OFF & _PWRTE_ON & _MCLRE_ON & _CP_OFF & _CPD_OFF & _BOREN_ON & _IESO_ON & _FCMEN_ON & _LVP_ON
+	__CONFIG    _CONFIG1, _FOSC_INTRC_NOCLKOUT & _WDTE_OFF & _PWRTE_OFF & _MCLRE_ON & _CP_OFF & _CPD_OFF & _BOREN_ON & _IESO_ON & _FCMEN_ON & _LVP_ON
 	__CONFIG    _CONFIG2, _BOR4V_BOR40V & _WRT_OFF
 
 ;-------------------DECLARACION DE VARIABLES------------------------------------
@@ -33,10 +33,10 @@
 	    MOVWF   V2		    ; para que el ciclo dure 1[ms].
     LINT    MOVLW   .83
 	    MOVWF   V1
-	    DECFSZ  V1		    ; Decremento V1. Si aún no es cero...
+	    DECFSZ  V1		    ; Decremento V1. Si aÃºn no es cero...
 	    GOTO    $-1		    ; sigo decrementando V1.
 	    DECFSZ  V2		    ; Si V1 es cero, decremento V2.
-	    GOTO    LINT	    ; Si V2 aún no es cero, recargo V1 y repito.
+	    GOTO    LINT	    ; Si V2 aÃºn no es cero, recargo V1 y repito.
 	    GOTO    LEXT	    ; Si V2 es cero, recargo V2 y repito.
 	    
 	    END
