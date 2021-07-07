@@ -1,0 +1,2 @@
+*.asm linguist-language=asm
+*.asm linguist-detectable=true
