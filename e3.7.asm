@@ -39,20 +39,20 @@
 	    MOVFW   VA    
 	    SUBWF   VB,0	    ; Resto B - A y almaceno el resultado en W.
 	    BTFSC   STATUS,Z	    ; Si la resta dio cero (A = B)...
-	    GOTO    EQUALS	    ; Voy a la etiqueta EQUALS.
+	    GOTO    EQUALS	    ; Voy a la etiqueta EQUALS...
 	    BTFSC   STATUS,C	    ; Si hubo carry (A < B por complem. a 2)...
-	    GOTO    AMINOR
-	    GOTO    ABIGGER
+	    GOTO    AMINOR	    ; Voy a la etiqueta AMINOR...
+	    GOTO    ABIGGER	    ; Sino, voy a la etiqueta ABIGGER...
 	    
-EQUALS	    CLRF    VR		    ; Si A = B, cargo 0 en R.
+EQUALS	    CLRF    VR		    ; Y cargo 0 en R.
 	    GOTO    $
 
-AMINOR	    MOVFW   VA		    ; Si A < B, cargo A + B en R.
+AMINOR	    MOVFW   VA		    ; Y cargo A + B en R.
 	    ADDWF   VB,0
 	    MOVWF   VR
 	    GOTO    $
 
-ABIGGER	    MOVFW   VB		    ; Si A > B, cargo A - B en R.
+ABIGGER	    MOVFW   VB		    ; Y cargo A - B en R.
 	    SUBWF   VA,0
 	    MOVWF   VR
 	    GOTO    $
