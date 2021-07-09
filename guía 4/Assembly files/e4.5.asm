@@ -1,10 +1,10 @@
 ;   Ejercicio 4.5:
 ;
 ;   Se desea que al apretar el pulsador conectado a RA4 parpadeen, a una
-;   frecuencia de 0.5[MHz], los 8 LEDs conectados en cátodo comñun a los 8
+;   frecuencia de 0.5[MHz], los 8 LEDs conectados en cÃ¡todo comÃ±un a los 8
 ;   terminales del puerto D de un microcontrolador PIC16F887. Dicho parpadeo
 ;   se debe interurmpir durante unos instantes (3 segundos) si se aprieta el
-;   pulsador conectado a RB0. Inicialmente, los LEDs están apagados.
+;   pulsador conectado a RB0. Inicialmente, los LEDs estÃ¡n apagados.
 ;   El oscilador es de 4[MHz].
 
 ;-------------------LIBRERIAS---------------------------------------------------
@@ -28,8 +28,6 @@
 
 ;-------------------CONFIGURACION DE REGISTROS----------------------------------
 	    
-	    ORG	    0x00
-	    
 	    BANKSEL TRISD	; Seteo PORTD como salida.
 	    CLRF    TRISD
 	    BANKSEL TRISB	; Seteo RA4 y RB0 como inputs.
@@ -51,18 +49,18 @@
 ;-------------------INICIO DEL PROGRAMA-----------------------------------------
 	    
     LOOP    BTFSS   PORTA,4	; Chequeo el estado de RA4.
-	    GOTO    PRESSEDA	; Si se apretó, hago el antirrebote.
+	    GOTO    PRESSEDA	; Si se apretÃ³, hago el antirrebote.
 	    GOTO    LOOP	; Sino, sigo haciendo polling en RA4.
 	    
-PRESSEDA    BTFSS   PORTA,4	; Cuando el estado de RA4 cambie, continúo.
+PRESSEDA    BTFSS   PORTA,4	; Cuando el estado de RA4 cambie, continÃºo.
 	    GOTO    $-1
   TOGGLE    COMF    PORTD,1	; Complemento el valor de PORTD.
 	    CALL    TIMER_2S	; Espero dos segundos.
 	    BTFSS   PORTB,0	; Chequeo el estado de RB0.
-	    CALL    PRESSEDB	; Si se apretó, hago el antirrebote.
+	    CALL    PRESSEDB	; Si se apretÃ³, hago el antirrebote.
 	    GOTO    TOGGLE	; Y vuelvo.
 	    
-PRESSEDB    BTFSS   PORTB,0	; Cuando el estado de RB0 cambie, continúo.
+PRESSEDB    BTFSS   PORTB,0	; Cuando el estado de RB0 cambie, continÃºo.
 	    GOTO    $-1
 	    CALL    TIMER_3S	; Espero tres segundos.
 	    RETURN		; Vuelvo
@@ -74,12 +72,12 @@ TIMER_2S    NOP			; --SUBRUTINA DE TIEMPO DE DOS SEGUNDOS--
 	    MOVWF   V2
    LINT2    MOVLW   .255
 	    MOVWF   V1
-	    DECFSZ  V1		; Decremento V1. Si aún no es cero...
+	    DECFSZ  V1		; Decremento V1. Si aÃºn no es cero...
 	    GOTO    $-1		; sigo decrementando V1.
 	    DECFSZ  V2		; Si V1 es cero, decremento V2.
-	    GOTO    LINT2	; Si V2 aún no es cero, recargo V1 y repito.
+	    GOTO    LINT2	; Si V2 aÃºn no es cero, recargo V1 y repito.
 	    DECFSZ  V3		; Si V2 es cero, decremento V3.
-	    GOTO    LEXT2	; Si V3 aún no es cero, recargo V2 y repito.
+	    GOTO    LEXT2	; Si V3 aÃºn no es cero, recargo V2 y repito.
 	    RETURN		; Si V3 es cero, salgo de la subrutina.
 	    
 TIMER_3S    NOP			; --SUBRUTINA DE TIEMPO DE TRES SEGUNDOS--
@@ -89,25 +87,25 @@ TIMER_3S    NOP			; --SUBRUTINA DE TIEMPO DE TRES SEGUNDOS--
 	    MOVWF   V2
    LINT3    MOVLW   .255
 	    MOVWF   V1
-	    DECFSZ  V1		; Decremento V1. Si aún no es cero...
+	    DECFSZ  V1		; Decremento V1. Si aÃºn no es cero...
 	    GOTO    $-1		; sigo decrementando V1.
 	    DECFSZ  V2		; Si V1 es cero, decremento V2.
-	    GOTO    LINT3	; Si V2 aún no es cero, recargo V1 y repito.
+	    GOTO    LINT3	; Si V2 aÃºn no es cero, recargo V1 y repito.
 	    DECFSZ  V3		; Si V2 es cero, decremento V3.
-	    GOTO    LEXT3	; Si V3 aún no es cero, recargo V2 y repito.
+	    GOTO    LEXT3	; Si V3 aÃºn no es cero, recargo V2 y repito.
 	    RETURN		; Si V3 es cero, salgo de la subrutina.
 	    
 ;-------------------COMENTARIOS-------------------------------------------------
 ;
-;	Este ejercicio está resuelto de manera burda. Es complicado controlar
+;	Este ejercicio estÃ¡ resuelto de manera burda. Es complicado controlar
 ;	el comportamiento de los LEDs teniendo en cuenta el pulsador RB0 sin
 ;	hacer uso de interrupciones. Como el tema de interrupciones no se
-;	abarca en la guía 4, este ejercicio se intentó resolver por polling.
-;	Para que se muestre el correcto funcionamiento, en la simulación en
-;	Proteus se deberá mantener presionado el botón de RB0 hasta que el
-;	PIC detecte que está presionado (por polling). Una vez hecho esto, se
-;	debe levantar el botón para que el antirrebote permita continuar con
-;	la ejecución del programa. Así se verán reflejados los tres segundos
+;	abarca en la guÃ­a 4, este ejercicio se intentÃ³ resolver por polling.
+;	Para que se muestre el correcto funcionamiento, en la simulaciÃ³n en
+;	Proteus se deberÃ¡ mantener presionado el botÃ³n de RB0 hasta que el
+;	PIC detecte que estÃ¡ presionado (por polling). Una vez hecho esto, se
+;	debe levantar el botÃ³n para que el antirrebote permita continuar con
+;	la ejecuciÃ³n del programa. AsÃ­ se verÃ¡n reflejados los tres segundos
 ;	de pausa que se indican en la consigna.
 	    
 	    END
