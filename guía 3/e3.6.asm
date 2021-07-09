@@ -1,6 +1,6 @@
 ;   Ejercicio 3.6:
 ;
-;   Escribir un programa que su ejecución demore un segundo (cristal de 4MHz).
+;   Escribir un programa que su ejecuciÃ³n demore un segundo (cristal de 4[MHz]).
 
 ;-------------------LIBRERIAS---------------------------------------------------
 
@@ -36,12 +36,12 @@
 	    MOVWF   V2
     LINT    MOVLW   .255
 	    MOVWF   V1
-	    DECFSZ  V1		    ; Decremento V1. Si aún no es cero...
+	    DECFSZ  V1		    ; Decremento V1. Si aÃºn no es cero...
 	    GOTO    $-1		    ; sigo decrementando V1.
 	    DECFSZ  V2		    ; Si V1 es cero, decremento V2.
-	    GOTO    LINT	    ; Si V2 aún no es cero, recargo V1 y repito.
+	    GOTO    LINT	    ; Si V2 aÃºn no es cero, recargo V1 y repito.
 	    DECFSZ  V3		    ; Si V2 es cero, decremento V3.
-	    GOTO    LMED	    ; Si V3 aún no es cero, recargo V2 y repito.
+	    GOTO    LMED	    ; Si V3 aÃºn no es cero, recargo V2 y repito.
 	    GOTO    LEXT	    ; Si V3 es cero, recargo V3 y repito.
 	    
 	    END
