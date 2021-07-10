@@ -67,7 +67,7 @@ PRESSEDB    BTFSS   PORTB,0	; Cuando el estado de RB0 cambie, continúo.
 	    
 TIMER_2S    NOP			; --SUBRUTINA DE TIEMPO DE DOS SEGUNDOS--
 	    MOVLW   .11		; Cargo V1, V2 y V3 con valores previamente
-	    MOVWF   V3		; calculados para que el ciclo dure 3[s].
+	    MOVWF   V3		; calculados para que el ciclo dure 2[s].
    LEXT2    MOVLW   .255
 	    MOVWF   V2
    LINT2    MOVLW   .255
