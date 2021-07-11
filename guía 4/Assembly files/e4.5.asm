@@ -1,7 +1,7 @@
 ;   Ejercicio 4.5:
 ;
 ;   Se desea que al apretar el pulsador conectado a RA4 parpadeen, a una
-;   frecuencia de 0.5[MHz], los 8 LEDs conectados en cátodo comñun a los 8
+;   frecuencia de 0.5[Hz], los 8 LEDs conectados en cátodo comñun a los 8
 ;   terminales del puerto D de un microcontrolador PIC16F887. Dicho parpadeo
 ;   se debe interurmpir durante unos instantes (3 segundos) si se aprieta el
 ;   pulsador conectado a RB0. Inicialmente, los LEDs están apagados.
