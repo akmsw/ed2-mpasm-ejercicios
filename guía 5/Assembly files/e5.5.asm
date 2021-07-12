@@ -1,10 +1,10 @@
 ;   Ejercicio 5.5:
 ;
 ;   Se desea que al apretar el pulsador conectado a RA4 parpadeen, a una
-;   frecuencia de 0.5[Hz], los 8 LEDs conectados en cátodo comñun a los 8
+;   frecuencia de 0.5[Hz], los 8 LEDs conectados en cÃ¡todo comÃ±un a los 8
 ;   terminales del puerto D de un microcontrolador PIC16F887. Dicho parpadeo
 ;   se debe interurmpir durante unos instantes (3 segundos) si se aprieta el
-;   pulsador conectado al terminal RB0. Inicialmente, los LEDs están apagados.
+;   pulsador conectado al terminal RB0. Inicialmente, los LEDs estÃ¡n apagados.
 ;   El oscilador es de 4[MHz].
 
 ;-------------------LIBRERIAS---------------------------------------------------
@@ -23,10 +23,8 @@
 	    V1	    EQU	    0x20    ; Variable para el loop interno.
 	    V2	    EQU	    0x21    ; Variable para el loop medio.
 	    V3	    EQU	    0x22    ; Variable para el loop externo.
-	    W_TEMP  EQU	    0x23    ; Variables para salvar/recuperar contexto.
-       STATUS_TEMP  EQU	    0x24
 	
-;-------------------INICIALIZACIÓN----------------------------------------------
+;-------------------INICIALIZACIÃ“N----------------------------------------------
 	    
 	    ORG	    0x00
 	    
@@ -34,7 +32,7 @@
 	    
 	    ORG	    0x04
 	    
-	    GOTO    RUT_INT	    ; Cuando ocurre una interrupción, voy a la
+	    GOTO    RUT_INT	    ; Cuando ocurre una interrupciÃ³n, voy a la
 				    ; rutina de la misma.
 
 ;-------------------CONFIGURACION DE REGISTROS----------------------------------
@@ -70,7 +68,7 @@
 ;-------------------INICIO DEL PROGRAMA-----------------------------------------
 	    
     LOOP    BTFSS   PORTA,4	; Chequeo el estado de RA4.
-	    GOTO    TOGGLE	; Si se apretó, hago el antirrebote.
+	    GOTO    TOGGLE	; Si se apretÃ³, hago el antirrebote.
 	    GOTO    LOOP	; Sino, sigo haciendo polling en RA4.
 	    
   TOGGLE    COMF    PORTD,1	; Complemento el valor de PORTD.
@@ -84,17 +82,17 @@ TIMER_1S    MOVLW   .6		    ; Cargo V1, V2 y V3 con valores previamente
 	    MOVWF   V2
     LINT    MOVLW   .255
 	    MOVWF   V1
-	    DECFSZ  V1		    ; Decremento V1. Si aún no es cero...
+	    DECFSZ  V1		    ; Decremento V1. Si aÃºn no es cero...
 	    GOTO    $-1		    ; sigo decrementando V1.
 	    DECFSZ  V2		    ; Si V1 es cero, decremento V2.
-	    GOTO    LINT	    ; Si V2 aún no es cero, recargo V1 y repito.
+	    GOTO    LINT	    ; Si V2 aÃºn no es cero, recargo V1 y repito.
 	    DECFSZ  V3		    ; Si V2 es cero, decremento V3.
-	    GOTO    LMED	    ; Si V3 aún no es cero, recargo V2 y repito.
+	    GOTO    LMED	    ; Si V3 aÃºn no es cero, recargo V2 y repito.
 	    RETURN		    ; Si V3 es cero, vuelvo.
 	    
-;-------------------RUTINA DE INTERRUPCIÓN--------------------------------------
+;-------------------RUTINA DE INTERRUPCIÃ“N--------------------------------------
 	    
- RUT_INT    BCF	    INTCON,INTF	    ; Limpio la flag de interrupción, espero 3
+ RUT_INT    BCF	    INTCON,INTF	    ; Limpio la flag de interrupciÃ³n, espero 3
 	    CALL    TIMER_1S	    ; segundos y vuelvo.
 	    CALL    TIMER_1S
 	    CALL    TIMER_1S
@@ -102,12 +100,12 @@ TIMER_1S    MOVLW   .6		    ; Cargo V1, V2 y V3 con valores previamente
 				    
 ;-------------------COMENTARIOS-------------------------------------------------
 ;
-;	Si bien la lógica del ejercicio funciona correctamente, en la
-;	simulación de Proteus no se consigue este funcionamiento y puede que
+;	Si bien la lÃ³gica del ejercicio funciona correctamente, en la
+;	simulaciÃ³n de Proteus no se consigue este funcionamiento y puede que
 ;	sea por hacer los retardos por software sin usar TMR0 (alguna variable
 ;	contadora queda en un loop infinito y deja al programa en un deadlock).
 ;	No se implementaron retardos por software con TMR0 porque no es tema de
-;	esta unidad. Resolver el ejercicio con TMR0 solucionaría este problema.
-;	Tratar de solucionarlo sin TMR0 es engorroso y poco fructífero.
+;	esta unidad. Resolver el ejercicio con TMR0 solucionarÃ­a este problema.
+;	Tratar de solucionarlo sin TMR0 es engorroso y poco fructÃ­fero.
 	    
 	    END
