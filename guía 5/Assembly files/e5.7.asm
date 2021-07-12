@@ -1,7 +1,7 @@
 ;   Ejercicio 5.7:
 ;
 ;   Usando interrupciones por RB0, muestre mediante un display de 7 segmentos el
-;   n˙mero de veces que sucediÛ un flanco descendiente. Considerar resistencias
+;   n√∫mero de veces que sucedi√≥ un flanco descendiente. Considerar resistencias
 ;   de pull-up internas habilitadas para PORTB. Mostrar el resultado por PORTD.
 
 ;-------------------LIBRERIAS---------------------------------------------------
@@ -17,7 +17,7 @@
 	
 ;-------------------DECLARACION DE VARIABLES------------------------------------
 	    
-	    D7S_0   EQU	    0x20    ; Registros que almacenar·n los valores
+	    D7S_0   EQU	    0x20    ; Registros que almacenar√°n los valores
 	    D7S_1   EQU	    0x21    ; binarios para encender los LEDs de un
 	    D7S_2   EQU	    0x22    ; display de 7 segmentos contando desde
 	    D7S_3   EQU	    0x23    ; 0 hasta 9.
@@ -28,7 +28,7 @@
 	    D7S_8   EQU	    0x28
 	    D7S_9   EQU	    0x29
 	
-;-------------------INICIALIZACI”N----------------------------------------------
+;-------------------INICIALIZACI√ìN----------------------------------------------
 	    
 	    ORG	    0x00
 	    
@@ -36,7 +36,7 @@
 	    
 	    ORG	    0x04
 	    
-	    GOTO    RUT_INT	    ; Cuando ocurre una interrupciÛn, voy a la
+	    GOTO    RUT_INT	    ; Cuando ocurre una interrupci√≥n, voy a la
 				    ; rutina de la misma.
 
 ;-------------------CONFIGURACION DE REGISTROS----------------------------------
@@ -67,7 +67,7 @@
 	    BANKSEL INTCON	    ; Habilito interrupciones por RB0.
 	    MOVLW   b'10010000'
 	    MOVWF   INTCON
-	    BANKSEL IOCB	    ; Habilito RB0 como fuente de interrupciÛn.
+	    BANKSEL IOCB	    ; Habilito RB0 como fuente de interrupci√≥n.
 	    CLRF    IOCB
 	    BSF	    IOCB,0
 	    BANKSEL OPTION_REG	    ; Habilito las resistencias de pull-up de
@@ -80,7 +80,7 @@
 	    BANKSEL TRISD	    ; Seteo PORTD como output digital.
 	    CLRF    TRISD
 	    BANKSEL PORTB	    ; Vuelvo al banco de PORTB para comenzar.
-	    MOVLW   0x20	    ; Cargo el FSR con la primera direcciÛn de
+	    MOVLW   0x20	    ; Cargo el FSR con la primera direcci√≥n de
 	    MOVWF   FSR		    ; memoria con los valores para los LEDs.
 	    GOTO    START
 
@@ -88,28 +88,28 @@
 	    
     START   MOVFW   INDF	    ; Cargo PORTD con 0 (valor inicial).
 	    MOVWF   PORTD
-	    GOTO    $		    ; No hago nada. Espero una interrupciÛn.
+	    GOTO    $		    ; No hago nada. Espero una interrupci√≥n.
 	    
-;-------------------RUTINA DE INTERRUPCI”N--------------------------------------
+;-------------------RUTINA DE INTERRUPCI√ìN--------------------------------------
 	    
- RUT_INT    BTFSC   INTCON,INTF	    ; Si fue interrupciÛn por RB0...
+ RUT_INT    BTFSC   INTCON,INTF	    ; Si fue interrupci√≥n por RB0...
 	    CALL    COUNT	    ; Voy a COUNT.
 	    GOTO    FINISH	    ; Sino, vuelvo.
 	    
-   COUNT    INCF    FSR
+   COUNT    INCF    FSR		    ; Incremento FSR y muestro INDF por PORTD.
 	    MOVFW   INDF
 	    MOVWF   PORTD
 	    MOVFW   FSR
-	    SUBLW   0x29
-	    BTFSC   STATUS,Z
+	    SUBLW   0x29	    ; Si llegu√© a la posici√≥n 29, reseteo a FSR
+	    BTFSC   STATUS,Z	    ; y vuelvo.
 	    CALL    RESET_FSR
 	    RETURN
 	    
-RESET_FSR   MOVLW   0x1F
-	    MOVWF   FSR
+RESET_FSR   MOVLW   0x1F	    ; Reseteo a FSR en 0x1F y no en 0x20 porque
+	    MOVWF   FSR		    ; en COUNT lo primero que hago es INCF FSR.
 	    RETURN
 	    
-  FINISH    BCF	    INTCON,INTF
-	    RETFIE
+  FINISH    BCF	    INTCON,INTF	    ; Bajo la flag de interrupci√≥n por RB0 y
+	    RETFIE		    ; vuelvo.
 	    
 	    END
