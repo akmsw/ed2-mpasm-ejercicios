@@ -39,42 +39,42 @@
 	    
             ORG	    0x05
 	    
- CONFIG_    NOP			; Para evitar bug de MPLAB.
-	    BANKSEL TRISD	; Seteo PORTD como salida.
+ CONFIG_    NOP			    ; Para evitar bug de MPLAB.
+	    BANKSEL TRISD	    ; Seteo PORTD como salida.
 	    CLRF    TRISD
-	    BANKSEL TRISB	; Seteo RA4 y RB0 como inputs.
+	    BANKSEL TRISB	    ; Seteo RA4 y RB0 como inputs.
 	    MOVLW   b'00000001'
 	    MOVWF   TRISB
 	    BANKSEL TRISA
 	    MOVLW   b'00010000'
-	    BANKSEL ANSEL	; Seteo PORTA y PORTB como digitales.
+	    BANKSEL ANSEL	    ; Seteo PORTA y PORTB como digitales.
 	    CLRF    ANSEL
 	    BANKSEL ANSELH
 	    CLRF    ANSELH
-	    BANKSEL INTCON	; Habilito las interrupciones por PORTB.
+	    BANKSEL INTCON	    ; Habilito las interrupciones por PORTB.
 	    MOVLW   b'10010000'
 	    MOVWF   INTCON
-	    BANKSEL IOCB	; Habilito RB0 como fuente de interrupciones.
+	    BANKSEL IOCB	    ; Habilito RB0 como fuente de interrupciones.
 	    MOVLW   b'00000001'
 	    MOVWF   IOCB
-	    BANKSEL PORTD	; Apago los LEDs de PORTD.
+	    BANKSEL PORTD	    ; Apago los LEDs de PORTD.
 	    CLRF    PORTD
-	    BANKSEL PORTA	; Vuelvo al banco de PORTA.
-	    CLRF    PORTA	; Limpio los registros a utilizar para evitar
-	    CLRF    PORTB	; trabajar con basura de ejecuciones anteriores.
+	    BANKSEL PORTA	    ; Vuelvo al banco de PORTA.
+	    CLRF    PORTA	    ; Limpio los registros a utilizar para evitar
+	    CLRF    PORTB	    ; trabajar con basura de ejecuciones anteriores.
 	    CLRW
 	    GOTO    LOOP
 
 ;-------------------INICIO DEL PROGRAMA-----------------------------------------
 	    
-    LOOP    BTFSS   PORTA,4	; Chequeo el estado de RA4.
-	    GOTO    TOGGLE	; Si se apretó, hago el antirrebote.
-	    GOTO    LOOP	; Sino, sigo haciendo polling en RA4.
+    LOOP    BTFSS   PORTA,4	    ; Chequeo el estado de RA4.
+	    GOTO    TOGGLE	    ; Si se apretó, hago el antirrebote.
+	    GOTO    LOOP	    ; Sino, sigo haciendo polling en RA4.
 	    
-  TOGGLE    COMF    PORTD,1	; Complemento el valor de PORTD.
-	    CALL    TIMER_1S	; Espero dos segundos.
+  TOGGLE    COMF    PORTD,1	    ; Complemento el valor de PORTD.
+	    CALL    TIMER_1S	    ; Espero dos segundos...
 	    CALL    TIMER_1S
-	    GOTO    TOGGLE	; Y vuelvo.
+	    GOTO    TOGGLE	    ; Y vuelvo.
 	    
 TIMER_1S    MOVLW   .6		    ; Cargo V1, V2 y V3 con valores previamente
 	    MOVWF   V3		    ; calculados para que el ciclo dure 1[s].
