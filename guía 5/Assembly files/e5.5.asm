@@ -99,13 +99,13 @@ TIMER_1S    MOVLW   .6		    ; Cargo V1, V2 y V3 con valores previamente
 	    RETFIE
 				    
 ;-------------------COMENTARIOS-------------------------------------------------
-;
-;	Si bien la lógica del ejercicio funciona correctamente, en la
-;	simulación de Proteus no se consigue este funcionamiento y puede que
-;	sea por hacer los retardos por software sin usar TMR0 (alguna variable
-;	contadora queda en un loop infinito y deja al programa en un deadlock).
-;	No se implementaron retardos por software con TMR0 porque no es tema de
-;	esta unidad. Resolver el ejercicio con TMR0 solucionaría este problema.
-;	Tratar de solucionarlo sin TMR0 es engorroso y poco fructífero.
+
+;   Si bien la lógica del ejercicio funciona correctamente, en la simulación de
+;   Proteus no se consigue este funcionamiento y puede que sea por hacer los
+;   retardos por software sin usar TMR0 (alguna variable contadora queda en un
+;   loop infinito y deja al programa en un deadlock). No se implementaron
+;   retardos por software con TMR0 porque no es tema de esta unidad. Resolver el
+;   ejercicio con TMR0 solucionaría este problema. Tratar de solucionarlo sin
+;   TMR0 es engorroso y poco fructífero.
 	    
 	    END
