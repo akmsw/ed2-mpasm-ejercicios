@@ -64,8 +64,8 @@
 	    
 ;-------------------RETARDOS----------------------------------------------------
 	    
-   TIMER    MOVLW   .13		    ; Cargo V1 y V2 y V3 con valores previamente
-	    MOVWF   V2		    ; calculados para que el ciclo dure 10[ms].
+   TIMER    MOVLW   .26		    ; Cargo V1 y V2 y V3 con valores previamente
+	    MOVWF   V2		    ; calculados para que el ciclo dure 20[ms].
     LINT    MOVLW   .255
 	    MOVWF   V1
 	    DECFSZ  V1		    ; Decremento V1.
