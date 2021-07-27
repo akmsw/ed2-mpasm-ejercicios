@@ -94,6 +94,7 @@ TIMER_3S    NOP			; --SUBRUTINA DE TIEMPO DE TRES SEGUNDOS--
 	    DECFSZ  V3		; Si V2 es cero, decremento V3.
 	    GOTO    LEXT3	; Si V3 aún no es cero, recargo V2 y repito.
 	    RETURN		; Si V3 es cero, salgo de la subrutina.
+
 ;-------------------COMENTARIOS-------------------------------------------------
 ;
 ;   Este ejercicio está resuelto de manera burda. Es complicado controlar el
