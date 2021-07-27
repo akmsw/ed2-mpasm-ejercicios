@@ -94,18 +94,16 @@ TIMER_3S    NOP			; --SUBRUTINA DE TIEMPO DE TRES SEGUNDOS--
 	    DECFSZ  V3		; Si V2 es cero, decremento V3.
 	    GOTO    LEXT3	; Si V3 aún no es cero, recargo V2 y repito.
 	    RETURN		; Si V3 es cero, salgo de la subrutina.
-	    
 ;-------------------COMENTARIOS-------------------------------------------------
 ;
-;	Este ejercicio está resuelto de manera burda. Es complicado controlar
-;	el comportamiento de los LEDs teniendo en cuenta el pulsador RB0 sin
-;	hacer uso de interrupciones. Como el tema de interrupciones no se
-;	abarca en la guía 4, este ejercicio se intentó resolver por polling.
-;	Para que se muestre el correcto funcionamiento, en la simulación en
-;	Proteus se deberá mantener presionado el botón de RB0 hasta que el
-;	PIC detecte que está presionado (por polling). Una vez hecho esto, se
-;	debe levantar el botón para que el antirrebote permita continuar con
-;	la ejecución del programa. Así se verán reflejados los tres segundos
-;	de pausa que se indican en la consigna.
+;   Este ejercicio está resuelto de manera burda. Es complicado controlar el
+;   comportamiento de los LEDs teniendo en cuenta el pulsador RB0 sin hacer uso
+;   de interrupciones. Como el tema de interrupciones no se abarca en la guía 4,
+;   este ejercicio se intentó resolver por polling. Para que se muestre el
+;   correcto funcionamiento, en la simulación en Proteus se deberá mantener
+;   presionado el botón de RB0 hasta que el PIC detecte que está presionado (por
+;   polling). Una vez hecho esto, se debe levantar el botón para que el
+;   antirrebote permita continuar con la ejecución del programa. Así se verán
+;   reflejados los tres segundos de pausa que se indican en la consigna.
 	    
 	    END
