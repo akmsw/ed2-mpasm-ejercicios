@@ -1,9 +1,9 @@
-;   Ejercicio 6.2A: (EJERCICIO PARA PRACTICAR MULTIPLEXACIÓN
+;   Ejercicio 6.2A: (EJERCICIO PARA PRACTICAR MULTIPLEXACIÃ“N
 ;		     ANTES DEL EJERCICIO 6.3)
 ;
-;   Utilizando el módulo TMR0, retardos y técnicas de multiplexación, desarrolle
+;   Utilizando retardos por software y tÃ©cnicas de multiplexaciÃ³n, desarrolle
 ;   un programa en Assembly que muestre el valor '0123' en un arreglo de cuatro
-;   displays de 7 segmentos de cátodo común. No usar TMR0.
+;   displays de 7 segmentos de cÃ¡todo comÃºn. No usar TMR0.
 
 ;-------------------LIBRERIAS---------------------------------------------------
 
@@ -40,7 +40,7 @@
 	    BANKSEL PORTC	    ; Vuelvo al banco de PORTC para empezar.
 	    GOTO    INIT
 	    
-    INIT    MOVFW   D_ON	    ; Cargo el número de display a encender y
+    INIT    MOVFW   D_ON	    ; Cargo el nÃºmero de display a encender y
 	    CALL    VALUES	    ; busco el valor que le corresponde mostrar.
 	    MOVWF   PORTC
 	    MOVFW   TR_ON	    ; Enciendo el transistor correspondiente.
@@ -52,7 +52,7 @@
 	    MOVFW   D_ON	    ; no haber sobrepasado la cantidad de
 	    SUBWF   D_QUA,W	    ; displays del arreglo.
 	    BTFSC   STATUS,Z
-	    GOTO    RESET_D	    ; Si pasé el límite, reseteo D_ON y TR_ON.
+	    GOTO    RESET_D	    ; Si pasÃ© el lÃ­mite, reseteo D_ON y TR_ON.
 	    BCF	    STATUS,C	    ; Sino, roto TR_ON para encender el
 	    RLF	    TR_ON	    ; siguiente transistor.
 	    GOTO    INIT
@@ -69,9 +69,9 @@
     LINT    MOVLW   .255
 	    MOVWF   V1
 	    DECFSZ  V1		    ; Decremento V1.
-	    GOTO    $-1		    ; Si V1 aún no es cero, sigo decrementando.
+	    GOTO    $-1		    ; Si V1 aÃºn no es cero, sigo decrementando.
 	    DECFSZ  V2		    ; Si V1 es cero, decremento V2.
-	    GOTO    LINT	    ; Si V2 aún no es cero, recargo V1 y repito.
+	    GOTO    LINT	    ; Si V2 aÃºn no es cero, recargo V1 y repito.
 	    RETURN		    ; Si V2 es cero, vuelvo.
     
 ;-------------------TABLAS------------------------------------------------------
@@ -84,11 +84,11 @@
 	    
 ;-------------------COMENTARIOS-------------------------------------------------
 ;
-;   Si bien el código funciona correctamente, en la simulación en Proteus
-;   la multiplexación no se apreciadel todo por el hecho de estar usando los
+;   Si bien el cÃ³digo funciona correctamente, en la simulaciÃ³n en Proteus
+;   la multiplexaciÃ³n no se apreciadel todo por el hecho de estar usando los
 ;   displays de manera individual interconectando los pines correspondientes
-;   entre ellos. Con el módulo de cuatro displays que ofrece Proteus, esto
-;   deja de ser un problema, pero se decidió hacer el esquema circuital de esta
-;   forma para dejar más en claro el funcionamiento electrónico.
+;   entre ellos. Con el mÃ³dulo de cuatro displays que ofrece Proteus, esto
+;   deja de ser un problema, pero se decidiÃ³ hacer el esquema circuital de esta
+;   forma para dejar mÃ¡s en claro el funcionamiento electrÃ³nico.
 
 	    END
