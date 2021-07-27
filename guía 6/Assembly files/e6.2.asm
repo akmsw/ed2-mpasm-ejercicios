@@ -149,8 +149,8 @@ ROWS_TEST   ADDWF   PCL,F
 	    RETLW   0x0F
 	    
 ;-------------------COMENTARIOS-------------------------------------------------
-;	    
-;	Para entender el funcionamiento del teclado, revisar el ejercicio 6.1
-;	donde se explica completamente.
+	    
+;   Para entender el funcionamiento del teclado, revisar el ejercicio 6.1 donde
+;   se explica completamente.
 	    
 	    END
