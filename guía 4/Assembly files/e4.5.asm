@@ -96,7 +96,7 @@ TIMER_3S    NOP			; --SUBRUTINA DE TIEMPO DE TRES SEGUNDOS--
 	    RETURN		; Si V3 es cero, salgo de la subrutina.
 
 ;-------------------COMENTARIOS-------------------------------------------------
-;
+
 ;   Este ejercicio está resuelto de manera burda. Es complicado controlar el
 ;   comportamiento de los LEDs teniendo en cuenta el pulsador RB0 sin hacer uso
 ;   de interrupciones. Como el tema de interrupciones no se abarca en la guía 4,
