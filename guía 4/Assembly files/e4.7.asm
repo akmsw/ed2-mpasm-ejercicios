@@ -124,7 +124,7 @@ TIMER_1S    MOVLW   .6		    ; Cargo V1, V2 y V3 con valores previamente
 	    GOTO    LOOP
 	    
 ;-------------------COMENTARIOS-------------------------------------------------
-;
+
 ;   Una vez más, este ejercicio tiene complicaciones por no trabajar con
 ;   interrupciones. Si bien la pulsación que comienza el conteo funciona
 ;   correctamente, la pulsación que lo detiene tiene la misma particularidad
