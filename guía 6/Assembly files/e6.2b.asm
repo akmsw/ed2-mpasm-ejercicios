@@ -85,7 +85,7 @@
 ;-------------------COMENTARIOS-------------------------------------------------
 ;
 ;   Si bien el código funciona correctamente, en la simulación en Proteus
-;   la multiplexación no se apreciadel todo por el hecho de estar usando los
+;   la multiplexación no se aprecia del todo por el hecho de estar usando los
 ;   displays de manera individual interconectando los pines correspondientes
 ;   entre ellos. Con el módulo de cuatro displays que ofrece Proteus, esto
 ;   deja de ser un problema, pero se decidió hacer el esquema circuital de esta
