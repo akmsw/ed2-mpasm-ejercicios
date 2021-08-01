@@ -35,7 +35,7 @@
 	    
 	    GOTO    CONFIG_
 	    
-	    ORG	    0X04
+	    ORG	    0x04
 	    
 	    GOTO    RUT_IN
 	    
