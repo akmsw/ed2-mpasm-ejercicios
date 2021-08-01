@@ -1,9 +1,9 @@
-;   Ejercicio 6.3: (LA CONSIGNA SE CAMBIÓ PARA SIMPLICIDAD)
+;   Ejercicio 6.3: (LA CONSIGNA SE CAMBIÃ“ PARA SIMPLICIDAD)
 ;
-;   Utilizando técnicas de multiplexado de display e interrupciones por TMR0, 
+;   Utilizando tÃ©cnicas de multiplexado de display e interrupciones por TMR0, 
 ;   desarrolle un programa en Assembly que muestre '000005' al iniciarse el
-;   programa. El número 5 se desplazará hacia la izquierda una posición cada 3
-;   segundos. Al llegar a '500000' se repetirá la rutina indefinidamente.
+;   programa. El nÃºmero 5 se desplazarÃ¡ hacia la izquierda una posiciÃ³n cada 3
+;   segundos. Al llegar a '500000' se repetirÃ¡ la rutina indefinidamente.
 ;   Considerar un cristal de 4[MHz].
 
 ;-------------------LIBRERIAS---------------------------------------------------
@@ -24,7 +24,7 @@
 	      V1    EQU	    0x22    ; Variables para el retardo por software.
 	      V2    EQU	    0x23
 	      V3    EQU	    0x24
-	 WHERE_5    EQU	    0x25    ; Dónde debe estar el 5.
+	 WHERE_5    EQU	    0x25    ; DÃ³nde debe estar el 5.
 	   T0_OF    EQU	    0x26    ; Cantidad de veces que TMR0 debe hacer
 				    ; overflow para llegar a los tiempos que
 				    ; necesitamos.
@@ -70,7 +70,7 @@
     INIT    MOVFW   D_ON	    ; Selecciono el display a encender.
 	    CALL    D_SELECT
 	    MOVWF   PORTD
-	    CALL    F_OR_Z	    ; Muestro un 5 o un 0 según corresponda.
+	    CALL    F_OR_Z	    ; Muestro un 5 o un 0 segÃºn corresponda.
 	    CALL    VALUES
 	    MOVWF   PORTC
 	    CALL    TIMER	    ; Lo muestro por 20[ms] y paso al siguiente
@@ -94,18 +94,18 @@
     LINT    MOVLW   .255
 	    MOVWF   V1
 	    DECFSZ  V1		    ; Decremento V1.
-	    GOTO    $-1		    ; Si V1 aún no es cero, sigo decrementando.
+	    GOTO    $-1		    ; Si V1 aÃºn no es cero, sigo decrementando.
 	    DECFSZ  V2		    ; Si V1 es cero, decremento V2.
-	    GOTO    LINT	    ; Si V2 aún no es cero, recargo V1 y repito.
+	    GOTO    LINT	    ; Si V2 aÃºn no es cero, recargo V1 y repito.
 	    RETURN		    ; Si V2 es cero, vuelvo.
 
 ;-------------------TABLAS------------------------------------------------------
 	    
-  VALUES    ADDWF   PCL,F	    ; Tabla para elegir qué mostrar.
+  VALUES    ADDWF   PCL,F	    ; Tabla para elegir quÃ© mostrar.
 	    RETLW   b'00111111'	    ; 0
 	    RETLW   b'01101101'	    ; 5
 	    
-D_SELECT    ADDWF   PCL,F	    ; Tabla para elegir qué display encender.
+D_SELECT    ADDWF   PCL,F	    ; Tabla para elegir quÃ© display encender.
 	    RETLW   b'11111110'
 	    RETLW   b'11111101'
 	    RETLW   b'11111011'
@@ -115,16 +115,17 @@ D_SELECT    ADDWF   PCL,F	    ; Tabla para elegir qué display encender.
 	    RETLW   b'10111111'
 	    RETLW   b'01111111'
 	    
-;-------------------RUTINA DE INTERRUPCIÓN--------------------------------------
+;-------------------RUTINA DE INTERRUPCIÃ“N--------------------------------------
 	    
-  RUT_IN    BTFSS   INTCON,T0IF ; Si no fue interrupción por TMR0, vuelvo.
+  RUT_IN    BTFSS   INTCON,T0IF ; Si no fue interrupciÃ³n por TMR0, vuelvo.
 	    RETFIE
 	    BCF	    INTCON,T0IF
 	    DECFSZ  T0_OF	    ; Si no pasaron 3[s], recargo TMR0 y vuelvo.
 	    GOTO    LOAD_T0	    ; Si pasaron 3[s], corro de lugar el 5 Y
-	    CALL    RESET_OF	    ; reseteo el valor del overflow, siempre
-	    INCF    WHERE_5,F	    ; chequeando no sobrepasar la cantidad de
-	    MOVFW   WHERE_5	    ; displays del arreglo.
+	    MOVLW   .60		    ; reseteo el valor del overflow, siempre
+	    MOVWF   T0_OF	    ; chequeando no sobrepasar la cantidad de
+	    INCF    WHERE_5,F	    ; displays del arreglo.
+	    MOVFW   WHERE_5
 	    SUBWF   D_QUA,W
 	    BTFSC   STATUS,Z
 	    CLRF    WHERE_5
@@ -133,9 +134,5 @@ D_SELECT    ADDWF   PCL,F	    ; Tabla para elegir qué display encender.
  LOAD_T0    MOVLW   .60
 	    MOVWF   TMR0
 	    RETFIE
-	    
-RESET_OF    MOVLW   .60
-	    MOVWF   T0_OF
-	    RETURN
 	    
 	    END
