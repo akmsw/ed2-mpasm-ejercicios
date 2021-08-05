@@ -1,8 +1,8 @@
 ;   Ejercicio 6.2A: (EJERCICIO PARA PRACTICAR INTERRUPCIONES POR PORTB Y USO DE
-;		     DISPLAYS ¡NODO COM⁄N ANTES DEL EJERCICIO 6.7)
+;		     DISPLAYS √ÅNODO COM√öN ANTES DEL EJERCICIO 6.7)
 ;
 ;   Implementar el ejercicio 6.1 pero con interrupciones por RB<4:7> y usando un
-;   display de 7 segmentos de ·nodo com˙n para mostrar la tecla presionada.
+;   display de 7 segmentos de √°nodo com√∫n para mostrar la tecla presionada.
 
 ;-------------------LIBRERIAS---------------------------------------------------
 
@@ -44,7 +44,7 @@
 	    MOVWF   MAX_COL
 	    MOVWF   MAX_ROW
 	    BANKSEL INTCON	    ; Habilito las interrupciones por RB<4:7> y
-	    BSF	    INTCON,GIE	    ; habilito tambiÈn las resistencias de
+	    BSF	    INTCON,GIE	    ; habilito tambi√©n las resistencias de
 	    BSF	    INTCON,RBIE	    ; pull-up en esos pines.
 	    BCF	    INTCON,RBIF
 	    BANKSEL OPTION_REG
@@ -68,7 +68,7 @@
 	    COMF    PORTC
 	    GOTO    INIT
 	    
-    INIT    GOTO    $		    ; Me quedo esperando una interrupciÛn.
+    INIT    GOTO    $		    ; Me quedo esperando una interrupci√≥n.
 		    
 ;-------------------TABLAS------------------------------------------------------
 		    
@@ -96,50 +96,50 @@ D7S_VALUES  ADDWF   PCL,F	    ; Retorno el valor a mostrar por el display.
 	    RETLW   B'11000110'	    ; (2,3) = C
 	    RETLW   B'10100001'	    ; (3,3) = D
 		    
-;-------------------RUTINA DE INTERRUPCI”N--------------------------------------
+;-------------------RUTINA DE INTERRUPCI√ìN--------------------------------------
 	    
-  RUT_IN    BTFSS   INTCON,RBIF	    ; SÛlo atiendo interrupciones por RB<4:7>.
+  RUT_IN    BTFSS   INTCON,RBIF	    ; S√≥lo atiendo interrupciones por RB<4:7>.
 	    RETFIE
 	    MOVFW   PORTB
 	    ANDLW   0xF0
 	    MOVWF   COL_HAB
 	    MOVWF   COL_HAB_AUX
 	    SWAPF   COL_HAB,F
-    TEST    RRF	    COL_HAB,F	    ; Roto COL_HAB hacia la derecha hasta que el
-	    BTFSS   STATUS,C	    ; 0 llegue al carry. A medida que roto, voy
-	    GOTO    ROW_DEC	    ; incrementando una variable que cuenta las
-	    INCF    COLUMN,F	    ; columnas (siempre verificando no pasar el
-	    MOVFW   COLUMN	    ; lÌmite de columnas del teclado). Cuando el
-	    SUBWF   MAX_COL,W	    ; 0 llega al carry significa que encontrÈ la
-	    BTFSC   STATUS,Z	    ; columna y voy a buscar la fila.
+    TEST    RRF	    COL_HAB,F
+	    BTFSS   STATUS,C
+	    GOTO    ROW_DEC
+	    INCF    COLUMN,F
+	    MOVFW   COLUMN
+	    SUBWF   MAX_COL,W
+	    BTFSC   STATUS,Z
 	    GOTO    FINISH
 	    GOTO    TEST
 	    
- ROW_DEC    MOVFW   ROW		    ; EnvÌo por PORTB de a uno los valores de la
-	    CALL    ROWS_TEST	    ; tabla ROWS_TEST. Chequeo el nibble
-	    MOVWF   PORTB	    ; inferior del resultado de la resta entre
-	    MOVFW   COL_HAB_AUX	    ; PORTB y COL_HAB_AUX hasta encontrar el
-	    SUBWF   PORTB,W	    ; mismo valor de fila (la resta darÌa 0).
-	    ANDLW   0xF0	    ; A medida que mando valores incremento la
-	    BTFSC   STATUS,Z	    ; variable contadora ROW. Cuando encuentro
-	    GOTO    SHOW_RES	    ; el valor de fila, voy a mostrar el
-	    INCF    ROW		    ; resultado por PORTD.
+ ROW_DEC    MOVFW   ROW
+	    CALL    ROWS_TEST
+	    MOVWF   PORTB
+	    MOVFW   COL_HAB_AUX
+	    SUBWF   PORTB,W
+	    ANDLW   0xF0
+	    BTFSC   STATUS,Z
+	    GOTO    SHOW_RES
+	    INCF    ROW
 	    MOVFW   ROW
 	    SUBWF   MAX_ROW,W
 	    BTFSC   STATUS,Z
 	    GOTO    FINISH
 	    GOTO    ROW_DEC
 	    
-SHOW_RES    BCF	    STATUS,C	    ; Limpio el bit de carry.
-	    RLF	    ROW,F	    ; La posiciÛn de la tecla viene dada por la
-	    RLF	    ROW,W	    ; ecuaciÛn KEY = 4*ROW + COLUMN. Para esto,
-	    ADDWF   COLUMN,W	    ; roto dos veces hacia la izquierda a ROW
-	    CALL    D7S_VALUES	    ; (eso me da 4*ROW) y al resultado le sumo
-	    MOVWF   PORTC	    ; COLUMN y busco en la tabla D7S_VALUES el
-	    GOTO    FINISH	    ; valor correspondiente a mostrar por PORTD.
+SHOW_RES    BCF	    STATUS,C
+	    RLF	    ROW,F
+	    RLF	    ROW,W
+	    ADDWF   COLUMN,W
+	    CALL    D7S_VALUES
+	    MOVWF   PORTC
+	    GOTO    FINISH
 
   FINISH    CLRF    PORTB	    ; Limpio PORTB y reseteo los valores de
-	    CLRF    ROW		    ; fila y columna para la prÛxima b˙squeda.
+	    CLRF    ROW		    ; fila y columna para la pr√≥xima b√∫squeda.
 	    CLRF    COLUMN
 	    RETFIE
   
