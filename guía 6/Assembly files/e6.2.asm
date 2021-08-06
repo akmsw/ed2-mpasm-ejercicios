@@ -2,7 +2,7 @@
 ;
 ;   Con la configuración del ejercicio 6.1, considere ahora que el micro tiene
 ;   un buffer circular de 6 teclas a partir de la dirección 30H.
-;   Se pide que el buffer sea llenado cno un byte por tecla que tenga el nibble
+;   Se pide que el buffer sea llenado con un byte por tecla que tenga el nibble
 ;   superior igual a 0 y que el nibble inferior sea igual al número que
 ;   representa la tecla.
 ;   Por ejemplo, si se presiona primero la tecla (0,3), en 30H guardo 0x03.
